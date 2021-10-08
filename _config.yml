@@ -1,0 +1,15 @@
+title: VirTEE
+description: >- # this means to ignore newlines until "baseurl:"
+  VirTEE is an Open Community dedicated to building FLOSS components
+  to enable the construction of Virtualization-based TEEs.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+show_downloads: false
+
+markdown: kramdown
+#theme: minima
+remote_theme: pages-themes/cayman@v0.2.0
+plugins:
+  - jekyll-feed
+  - jekyll-remote-theme # add this line to the plugins list if you already have one
+
