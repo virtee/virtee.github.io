@@ -42,6 +42,6 @@ For more information, check [this whitepaper](https://confidentialcomputing.io/w
 
 ## What is a Virtualization-based TEE?
 
-It's a TEE that's constructed using [Hardware-assisted Virtualization](https://en.wikipedia.org/wiki/Hardware-assisted_virtualization), combined with other technologies (AMD SEV, Intel TDX or Armv9 Reamls) that enable the guest owner to verify the integrity and confidentiality of the Virtual Machine.
+It's a TEE that's constructed using [Hardware-assisted Virtualization](https://en.wikipedia.org/wiki/Hardware-assisted_virtualization), combined with other technologies (AMD SEV, Intel TDX or Armv9 Realms) that enable the guest owner to verify the integrity and confidentiality of the Virtual Machine.
 
 
