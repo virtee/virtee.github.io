@@ -1,14 +1,14 @@
 ---
-layout: default
+layout: page
 ---
 
 VirTEE is an Open Community dedicated to building FLOSS components to enable the construction of Virtualization-based TEEs (Trusted Execution Environments) using technologies such as [AMD SEV](https://developer.amd.com/sev/) (and [SNP](https://www.amd.com/system/files/TechDocs/SEV-SNP-strengthening-vm-isolation-with-integrity-protection-and-more.pdf)), [Intel TDX](https://software.intel.com/content/www/us/en/develop/articles/intel-trust-domain-extensions.html) and [Armv9 Realms](https://www.arm.com/why-arm/architecture/security-features/arm-confidential-compute-architecture).
 
-# Communication channels
+## Communication channels
 
 - Chat: [#virtee on Matrix](https://matrix.to/#/#virtee:matrix.org)
 
-# Current projects
+## Current projects
 
 - [libkrun-SEV](https://github.com/containers/libkrun): A dynamic library providing Virtualization-based process isolation capabilities, also capable of creating TEEs using AMD SEV(-ES).
 
@@ -18,7 +18,7 @@ VirTEE is an Open Community dedicated to building FLOSS components to enable the
 
 *Do you have a project that you would see listed here? [Propose a change to this page!](https://github.com/virtee/virtee.github.io/blob/gh-pages/index.md)*
 
-# Other resources
+## Other resources
 
 - [Using SEV with QEMU and libvirt](https://libvirt.org/kbase/launch_security_sev.html)
 
@@ -28,9 +28,9 @@ VirTEE is an Open Community dedicated to building FLOSS components to enable the
 
 - [Trying out the SEV flavor of libkrun](https://github.com/containers/libkrun/wiki/Trying-out-the-SEV-flavor-of-libkrun)
 
-# FAQ
+## FAQ
 
-## What is a TEE?
+### What is a TEE?
 
 According to the [CCC](https://confidentialcomputing.io/) (Confidential Computing Consortium), a TEE is as an environment that provides a level of assurance of the following three properties:
 
@@ -40,8 +40,7 @@ According to the [CCC](https://confidentialcomputing.io/) (Confidential Computin
 
 For more information, check [this whitepaper](https://confidentialcomputing.io/whitepaper-02-latest/) published by the CCC.
 
-## What is a Virtualization-based TEE?
+### What is a Virtualization-based TEE?
 
 It's a TEE that's constructed using [Hardware-assisted Virtualization](https://en.wikipedia.org/wiki/Hardware-assisted_virtualization), combined with other technologies (AMD SEV, Intel TDX or Armv9 Realms) that enable the guest owner to verify the integrity and confidentiality of the Virtual Machine.
-
 
