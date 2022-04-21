@@ -14,7 +14,9 @@ VirTEE is an Open Community dedicated to building FLOSS components to enable the
 
 - [sev-attestation-server](https://github.com/slp/sev-attestation-server): An example attestation server for AMD SEV(-ES).
 
-- [sevctl](https://github.com/enarx/sevctl): A command line utility for managing the AMD Secure Encrypted Virtualization (SEV) platform.
+- [sevctl](https://github.com/virtee/sevctl): A command line utility for managing the AMD Secure Encrypted Virtualization (SEV) platform.
+
+- [sev](https://github.com/virtee/sev): Rust abstraction library for the SEV API.
 
 *Do you have a project that you would see listed here? [Propose a change to this page!](https://github.com/virtee/virtee.github.io/blob/gh-pages/index.md)*
 
@@ -23,8 +25,6 @@ VirTEE is an Open Community dedicated to building FLOSS components to enable the
 - [Using SEV with QEMU and libvirt](https://libvirt.org/kbase/launch_security_sev.html)
 
 - [SUSE's AMD Secure Encrypted Virtualization (AMD-SEV) Guide](https://documentation.suse.com/sles/15-SP1/pdf/art-amd-sev_color_en.pdf)
-
-- [Enarx's "sev" crate providing abstractions for the SEV API](https://github.com/enarx/sev)
 
 - [Trying out the SEV flavor of libkrun](https://github.com/containers/libkrun/wiki/Trying-out-the-SEV-flavor-of-libkrun)
 
