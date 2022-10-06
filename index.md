@@ -10,13 +10,15 @@ VirTEE is an Open Community dedicated to building FLOSS components to enable the
 
 ## Current projects
 
-- [libkrun-SEV](https://github.com/containers/libkrun): A dynamic library providing Virtualization-based process isolation capabilities, also capable of creating TEEs using AMD SEV(-ES).
+- [sev](https://github.com/virtee/sev): Rust library exposing APIs for the AMD SEV platform
 
-- [sev-attestation-server](https://github.com/slp/sev-attestation-server): An example attestation server for AMD SEV(-ES).
+- [sevctl](https://github.com/virtee/sevctl): Administrative utility for AMD SEV
 
-- [sevctl](https://github.com/virtee/sevctl): A command line utility for managing the AMD Secure Encrypted Virtualization (SEV) platform.
+- [kbs-types](https://github.com/virtee/kbs-types): Rust (de)serializable types for KBS
 
-- [sev](https://github.com/virtee/sev): Rust abstraction library for the SEV API.
+- [reference-kbs](https://github.com/virtee/reference-kbs): A reference implementation of the KBS attestation protocol
+
+- [oci2cw](https://github.com/virtee/oci2cw): Utility to transform OCI images into Confidential Workloads
 
 *Do you have a project that you would see listed here? [Propose a change to this page!](https://github.com/virtee/virtee.github.io/blob/gh-pages/index.md)*
 
