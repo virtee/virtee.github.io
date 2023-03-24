@@ -53,9 +53,9 @@ The initial communication to the KBS is established by the KBC by sending a JSON
 2. The TEE architecture that the workload is being run on.
 3. Extra parameters - Miscellaneous data that can be used by the attestation server.
 
-Currently, there is only one version of the KBS protocol. Thus, the KBS server can be expected to ignore the version field. In our current example, we are attesting the AMD SEV-SNP environment. SEV-SNP does not require any extra miscellaneous data in the request step, so the extra parameters field can also be ignored.
+Currently, there is only one version of the KBS protocol. Thus, the KBS server can be expected to ignore the ```version``` field. In our current example, we are attesting the AMD SEV-SNP environment. SEV-SNP does not require any extra miscellaneous data in the request step, so the extra parameters field can also be ignored.
 
-Here is an example KBS Request structure in JSON format.
+Here is an example KBS ```Request``` structure in JSON format.
 
 ```json
 {
@@ -67,9 +67,9 @@ Here is an example KBS Request structure in JSON format.
 
 ### KBS Challenge
 
-In receiving a Request from the KBC and validating its data, a KBS will reply with a Challenge structure. In SEV-SNP, a Challenge only contains a nonce word - a random string of data specific to the KBS. When a KBC requests its SEV-SNP attestation report from the Platform Security Processor (PSP), it is allowed to submit up to 64 bytes of data to be included in the report. In order to guarantee freshness, the nonce word (together with a created TEE public key for encrypting the passphrase) must be used by the KBC to build another SHA-512 hash. This hash (known as the "freshness hash") will eventually be rebuilt by the KBS and compared with the attestation report's version to ensure freshness (i.e. that the attestation report came from the PSP and was not pre-cached).
+In receiving a ```Request``` from the KBC and validating its data, a KBS will reply with a ```Challenge``` structure. In SEV-SNP, a ```Challenge``` only contains a ```nonce``` word - a random string of data specific to the KBS. When a KBC requests its SEV-SNP attestation report from the Platform Security Processor (PSP), it is allowed to submit up to 64 bytes of data to be included in the report. In order to guarantee freshness, the ```nonce``` word (together with a created TEE public key for encrypting the passphrase) must be used by the KBC to build another SHA-512 hash. This hash (known as the "freshness hash") will eventually be rebuilt by the KBS and compared with the attestation report's version to ensure freshness (i.e. that the attestation report came from the PSP and was not pre-cached).
 
-Here is an example KBS Challenge returned by the KBS in JSON format:
+Here is an example KBS ```Challenge``` returned by the KBS in JSON format:
 
 ```json
 {
@@ -80,7 +80,7 @@ Here is an example KBS Challenge returned by the KBS in JSON format:
 
 ### KBS Attest
 
-The client and server both serve roles in the attest phase of KBS attestation.
+The client and server both serve roles in the attest interface of KBS attestation.
 
 The client will do the following:
 1. Create a TEE public key. This key will be used by the attestation server to encrypt the passphrase of the LUKS-encrypted disk.
@@ -88,9 +88,9 @@ The client will do the following:
 3. Hex-encode the attestation report's bytes.
 4. Serialize the attestation report along with the TEE public key, and send the contents to the attestation server.
 
-If one feels inclined to include a certificate chain, they are able to do so in the "cert_chain" field of the Attestation struct. For libkrun and reference-kbs, we opt to elect the attestation server to fetch the certificate chain.
+If one feels inclined to include a certificate chain, they are able to do so in the ```cert_chain``` field of the ```Attestation``` struct. For libkrun and reference-kbs, we opt to elect the attestation server to fetch the certificate chain.
 
-Here is an example KBS Attestation structure in JSON format.
+Here is an example KBS ```Attestation``` structure in JSON format.
 
 ```json
 {
@@ -103,13 +103,13 @@ Here is an example KBS Attestation structure in JSON format.
         "report": "hex-encoded-attestation-report",
         "cert_chain": "[]", // Attestation server's responsibility for fetching the cert chain.
         "gen": "milan"
-    }
+    },
 }
 ```
 
 The server will do the following:
 1. Recreate the "freshness hash" from the cached nonce and given TEE public key, and compare the two to guarantee the attestation report is fresh.
-2. Using the given SEV-SNP generation (at time of writing, this is either "milan" or "genoa"), retrieve the ARK and ASK from the AMD Key Distribution Server.
+2. Using the given SEV-SNP generation (at time of writing, this is either ```milan``` or ```genoa```), retrieve the ARK and ASK from the AMD Key Distribution Server.
 3. Retrieve the VCEK using the current TCB values.
 4. Validate the certificate chain to prove that the given attestation report came from an AMD PSP.
 5. Compare the measurement registered beforehand from the client with the measurement from the attestation report.
@@ -141,10 +141,10 @@ With the latest changes in [libkrun](https://github.com/containers/libkrun) and 
 
 Below is a demonstration of running an attested, confidential podman container. First, a regular (i.e. unencrypted, not using any TEE confidentiality) container is created using podman. The memory contents of this container are read and the secret is examined.
 
-Then, using that same podman container (known as "hellodemo" in the demonstration), we invoke oci2cw to:
+Then, using that same podman container (known as ```hellodemo``` in the demonstration), we invoke [oci2cw](https://github.com/virtee/oci2cw) to:
 1. Format a LUKS-encrypted disk to store the application, disallowing the running of the application until the disk is unlocked.
-2. Using a JSON configuration file (hellodemo.json) and a created passphrase, register the container with the reference-kbs attestation server.
+2. Using a JSON configuration file ```hellodemo.json``` and a created passphrase, register the container with the reference-kbs attestation server.
 
-We then use podman (with --runtime=krun) to begin executing the newly-created confidential workload (known as "hellodemo-cw" in the demonstration) and attest the workload. Once the workload is successfully attested/started, we examine the confidentiality by trying to read the containers secret from the VM's memory. We subsequently see that we are unable to find the secret when grep'ing for it (because the krun VM's memory is encrypted).
+We then use podman (with ```--runtime=krun```) to begin executing the newly-created confidential workload (known as ```hellodemo-cw``` in the demonstration) and attest the workload. Once the workload is successfully attested/started, we examine the confidentiality by trying to read the containers secret from the VM's memory. We subsequently see that we are unable to find the secret when ```grep```'ing for it (because the krun VM's memory is encrypted).
 
 [![asciicast](https://asciinema.org/a/569023.svg)](https://asciinema.org/a/569023)
