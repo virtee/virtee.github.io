@@ -7,12 +7,12 @@ categories: [Confidential Workloads, libkrun, SEV-SNP]
 
 **NOTE:** Before reading this post, you may be interested in what confidential workloads are and why/how they are used. To address these questions, I recommend you check out a previous blog post on the VirTEE blog from Sergio Lopez entitled "[The Case for Confidential Workloads](https://virtee.io/the-case-for-confidential-workloads/)".
 
-With our latest contributions, libkrun (along with "[crun](https://github.com/containers/crun/blob/main/README.md)", "[podman](https://docs.podman.io/en/latest/)", and "[oci2cw](https://github.com/virtee/oci2cw/blob/main/README.md)") has become the first open source platform to offer attestable confidential workloads on the AMD SEV, SEV-ES, and SEV-SNP TEE environments. In this post, I'll be giving an overview of the AMD SEV-SNP attestation process and showing how to run an attested confidential workload with libkrun in the SEV-SNP environment.
+With our latest contributions, libkrun (along with [crun](https://github.com/containers/crun/blob/main/README.md), [podman](https://docs.podman.io/en/latest/), and [oci2cw](https://github.com/virtee/oci2cw/blob/main/README.md)) has become the first open source platform to offer attestable confidential workloads on the AMD SEV, SEV-ES, and SEV-SNP TEE environments. In this post, I'll be giving an overview of the AMD SEV-SNP attestation process and showing how to run an attested confidential workload with libkrun in the SEV-SNP environment.
 
 ## Background Information
 
-- **AMD SEV-SNP**: SEV-SNP (Secure Encrypted Virtualization - Secure Nested Paging) is the third-generation SEV architecture offered by AMD. It builds on the previous two SEV generations (SEV and SEV-ES), allowing for encrypted in-use data (RAM) and register state while introducing memory integrity protection to prevent a number of malicious hypervisor attacks. You can read more about SEV-SNP in "[this white paper from AMD](https://www.amd.com/system/files/TechDocs/SEV-SNP-strengthening-vm-isolation-with-integrity-protection-and-more.pdf)".
-- **Attestation**: A process intended to establish trust between a client running a confidential workload and the platform in which the workload is being run on. Attestation is a process that confirms that only code/data that is known to the client and intended to be used is included in the TEE workload, and that the workload is running on a verified TEE architecture. An explanation of attestation in a bit more detail can be found "[here](https://globalplatform.org/attestation-and-tee-cybersecurity-controls-with-privacy-for-cloud-access/)".
+- **AMD SEV-SNP**: SEV-SNP (Secure Encrypted Virtualization - Secure Nested Paging) is the third-generation SEV architecture offered by AMD. It builds on the previous two SEV generations (SEV and SEV-ES), allowing for encrypted in-use data (RAM) and register state while introducing memory integrity protection to prevent a number of malicious hypervisor attacks. You can read more about SEV-SNP in [this white paper from AMD](https://www.amd.com/system/files/TechDocs/SEV-SNP-strengthening-vm-isolation-with-integrity-protection-and-more.pdf).
+- **Attestation**: A process intended to establish trust between a client running a confidential workload and the platform in which the workload is being run on. Attestation is a process that confirms that only code/data that is known to the client and intended to be used is included in the TEE workload, and that the workload is running on a verified TEE architecture. An explanation of attestation in a bit more detail can be found [here](https://globalplatform.org/attestation-and-tee-cybersecurity-controls-with-privacy-for-cloud-access/).
 - **libkrun**: A dynamic library allowing for programs to acquire the ability to run as processes in a partially isolated environment using KVM virtualization. With the libkrun-tee package, these processes can be run confidentially, where not even the root process can view into the workload's code/data.
 
 ## Why is attestation needed?
@@ -25,7 +25,7 @@ The purpose of an attestation is to cryptographically prove to a client that the
 
 It is important to note that different TEE architectures (i.e. AMD SEV, SEV-SNP and Intel SGX, TDX) are attested differently. This post will only be describing libkrun's SEV-SNP attestation protocol.
 
-libkrun utilizes the "[Key Broker Service (KBS)](https://github.com/confidential-containers/kbs/blob/main/docs/kbs_attestation_protocol.md)" protocol for attestation. The KBS protocol defines the communication between a Key Broker Client (KBC, in this case being the libkrun workload) and a trusted Key Broker Service (KBS). There is a simple "Request-Challenge-Attestation-Response" (RCAR) method to facilitate workload attestation.
+libkrun utilizes the [Key Broker Service (KBS)](https://github.com/confidential-containers/kbs/blob/main/docs/kbs_attestation_protocol.md) protocol for attestation. The KBS protocol defines the communication between a Key Broker Client (KBC, in this case being the libkrun workload) and a trusted Key Broker Service (KBS). There is a simple "Request-Challenge-Attestation-Response" (RCAR) method to facilitate workload attestation.
 
 
 ### Before you begin: Register Workload
@@ -135,7 +135,7 @@ Attestation allows for a confidential client to ensure that:
 1. Their workload is running on trusted TEE hardware.
 2. The software of their workload is measured and verified (i.e. not containing nefarious code/data that can violate the confidentiality of the workload).
 
-With the latest changes in "[libkrun](https://github.com/containers/libkrun)" and "[reference-kbs](https://github.com/virtee/reference-kbs)", one can now use these to create attestable, confidential workloads on SEV-SNP.
+With the latest changes in [libkrun](https://github.com/containers/libkrun) and [reference-kbs](https://github.com/virtee/reference-kbs), one can now use these to create attestable, confidential workloads on SEV-SNP.
 
 ## Demonstration
 
