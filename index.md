@@ -38,7 +38,7 @@ VirTEE is an Open Community dedicated to building FLOSS components to enable the
 
 - [Using SEV with QEMU and libvirt](https://libvirt.org/kbase/launch_security_sev.html)
 
-- [SUSE's AMD Secure Encrypted Virtualization (AMD-SEV) Guide](https://documentation.suse.com/sles/15-SP1/pdf/art-amd-sev_color_en.pdf)
+- [SUSE's AMD Secure Encrypted Virtualization (AMD-SEV) Guide](https://documentation.suse.com/sles/15-SP6/pdf/article-amd-sev_en.pdf)
 
 - [Trying out the SEV flavor of libkrun](https://github.com/containers/libkrun/wiki/Trying-out-the-SEV-flavor-of-libkrun)
 
